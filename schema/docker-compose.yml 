@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  instapic-api-doc:
+    build: .
+    ports:
+      - 9000:81
+    hostname: swaggerui
+    volumes:
+      - ./api.json:/app/api.json

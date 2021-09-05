@@ -1,0 +1,107 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Instapic API",
+    "description": "Ruby on Rails Backend Server",
+    "contact": {
+      "name": "Adam Wan",
+      "email": "adamwtz@icloud.com",
+      "url": "https://github.com/adamaiken89"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    },
+    {
+      "url": "https://instapicrails.herokuapp.com/"
+    }
+  ],
+  "security": [
+    {
+      "headerAuth": []
+    }
+  ],
+  "paths": {
+    "/sessions": {
+      "post": {
+        "tags": [
+          "sessions"
+        ],
+        "summary": "Create a login session",
+        "description": "",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The session is created."
+          },
+          "403": {
+            "description": "The chat file ID does not exist. The user does not have rights to rename this chat file."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "headerAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization"
+      }
+    },
+    "schemas": {
+      "AvatarUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "files[]": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      }
+    },
+    "parameters": {
+      "idParam": {
+        "in": "path",
+        "name": "id",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "required": true
+      },
+      "pageParam": {
+        "in": "query",
+        "name": "page",
+        "description": "The page of current list",
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "sizeParam": {
+        "in": "query",
+        "name": "size",
+        "description": "The size of each page",
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200
+        }
+      }
+    }
+  }
+}
